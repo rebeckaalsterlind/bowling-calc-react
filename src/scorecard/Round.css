@@ -1,0 +1,14 @@
+.round-box {
+  border: 1px solid black;
+  height: 60px;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: right;
+  align-items: start;
+}
+
+.corner-box {
+  width: 50%;
+  height: 50%;
+  background-color: purple;
+}

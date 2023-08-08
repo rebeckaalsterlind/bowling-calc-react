@@ -1,0 +1,11 @@
+.scorecard-container {
+  width: 80%;
+  border: 1px solid orange;
+}
+
+.scorecard-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}

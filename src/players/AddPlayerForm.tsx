@@ -4,11 +4,10 @@ import { PlayersContext } from "../contexts/PlayersContext";
 
 function AddPlayerForm() {
   const [value, handleChange, reset] = useInputState("");
-
   const { addPlayer, showAddPlayer, toggle } = useContext(PlayersContext);
 
   return (
-    <>
+    <article>
       {showAddPlayer ? (
         <button onClick={toggle}>Add new player</button>
       ) : (
@@ -23,7 +22,7 @@ function AddPlayerForm() {
           <button type="submit">Add</button>
         </form>
       )}
-    </>
+    </article>
   );
 }
 

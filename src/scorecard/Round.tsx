@@ -1,10 +1,17 @@
 import * as React from "react";
 import "./Round.css";
 
-function Round() {
+interface Props {
+  num: number;
+}
+function Round({ num }: Props) {
   return (
-    <div className={"scorecard-item round-box"}>
-      <aside className={"corner-box"}></aside>
+    <div className={"scorecard-round"}>
+      <header className={"scorecard-header"}>{num}</header>
+      <div className={" score-box"}>
+        <aside className={"corner-box"}></aside>
+        <div className={"totals-box"}></div>
+      </div>
     </div>
   );
 }

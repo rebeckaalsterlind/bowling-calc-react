@@ -1,11 +1,9 @@
-.scorecard-container {
-  width: 80%;
-  border: 1px solid orange;
+.active-player {
+  border: 2px solid orange;
 }
-
-.scorecard-header {
+.scorecard {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  height: 20px;
+  margin-bottom: 5px;
+  border: 1px solid black;
 }

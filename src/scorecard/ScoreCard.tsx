@@ -1,31 +1,31 @@
 import React, { useContext } from "react";
 import "./ScoreCard.css";
 import "../CssLib.css";
-import Rounds from "./Rounds";
-import Hdcp from "./Hdcp";
-import MaxPossible from "./MaxPossible";
 import { IPlayer } from "../types/players";
 import { PlayersContext } from "../contexts/PlayersContext";
-
-function ScoreCard() {
-  const { players } = useContext(PlayersContext);
-  const rounds: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+import Round from "./Round";
+import Hdcp from "./Hdcp";
+import MaxPossible from "./MaxPossible";
+interface Props {
+  player: IPlayer;
+}
+function ScoreCard({ player }: Props) {
+  const roundNumbers: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+  const { activePlayer, updateActivePlayer } = useContext(PlayersContext);
+  const isActive = (playerId: string) => playerId === activePlayer.id;
 
   return (
-    <section className={"scorecard-container"}>
-      <header className={"scorecard-header"}>
-        <div className={"scorecard-item"}>Player</div>
-        {rounds.map((round) => (
-          <div key={round} className={"scorecard-item"}>
-            {round}
-          </div>
-        ))}
-        <Hdcp />
-        <MaxPossible />
-      </header>
-      {players.map((player: IPlayer) => (
-        <Rounds player={player} rounds={rounds} key={player.id} />
+    <section
+      className={`scorecard ${isActive(player.id) ? "active-player" : ""}`}
+      onClick={updateActivePlayer(player)}
+    >
+      {roundNumbers.map((num) => (
+        <>
+          <Round key={num} num={num} />
+        </>
       ))}
+      <Hdcp />
+      <MaxPossible />
     </section>
   );
 }

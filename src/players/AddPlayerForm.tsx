@@ -4,6 +4,7 @@ import { PlayersContext } from "../contexts/PlayersContext";
 
 function AddPlayerForm() {
   const [value, handleChange, reset] = useInputState("");
+
   const { addPlayer, showAddPlayer, toggle } = useContext(PlayersContext);
 
   return (

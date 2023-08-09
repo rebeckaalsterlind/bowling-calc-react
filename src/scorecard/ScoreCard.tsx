@@ -9,7 +9,6 @@ import { PlayersContext } from "../contexts/PlayersContext";
 
 function ScoreCard() {
   const { players } = useContext(PlayersContext);
-  console.log("playsefse", players);
   const rounds: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
@@ -17,7 +16,9 @@ function ScoreCard() {
       <header className={"scorecard-header"}>
         <div className={"scorecard-item"}>Player</div>
         {rounds.map((round) => (
-          <div className={"scorecard-item"}>{round}</div>
+          <div key={round} className={"scorecard-item"}>
+            {round}
+          </div>
         ))}
         <Hdcp />
         <MaxPossible />

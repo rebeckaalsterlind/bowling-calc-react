@@ -12,12 +12,15 @@ interface Props {
 function ScoreCard({ player }: Props) {
   const roundNumbers: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
   const { activePlayer, updateActivePlayer } = useContext(PlayersContext);
-  const isActive = (playerId: string) => playerId === activePlayer.id;
+  const isActive = (playerId: string) => {
+    console.log("in is avtive", playerId === activePlayer.id);
+    return playerId === activePlayer.id;
+  };
 
   return (
     <section
       className={`scorecard ${isActive(player.id) ? "active-player" : ""}`}
-      onClick={updateActivePlayer(player)}
+      onClick={() => updateActivePlayer(player)}
     >
       {roundNumbers.map((num) => (
         <>

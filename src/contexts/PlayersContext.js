@@ -5,7 +5,7 @@ export const PlayersContext = createContext();
 
 export function PlayersProvider(props) {
   const [players, setPlayers] = useState([
-    { name: "first player", id: uuid(), score: [] },
+    { name: "first player", id: uuid(), hdcp: 0, score: [] },
   ]);
 
   const [activePlayer, setActivePlayer] = useState(players[0]);
@@ -19,7 +19,7 @@ export function PlayersProvider(props) {
 
   const addPlayer = (name) => {
     if (name) {
-      setPlayers([...players, { name: name, id: uuid(), score: [] }]);
+      setPlayers([...players, { name: name, id: uuid(), hdcp: 0, score: [] }]);
     }
     toggle();
   };

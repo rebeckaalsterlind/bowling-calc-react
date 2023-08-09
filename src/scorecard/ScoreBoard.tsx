@@ -13,7 +13,9 @@ function ScoreBoard() {
     <article className={"scoreboard"}>
       {players.map((player: IPlayer) => (
         <>
-          <div>{player.name}</div>
+          <div>
+            {player.name} | Hdcp: {player.hdcp}
+          </div>
           <ScoreCard player={player} key={player.id} />
         </>
       ))}

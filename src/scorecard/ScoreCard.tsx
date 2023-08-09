@@ -1,16 +1,15 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import "./ScoreCard.css";
 import "../CssLib.css";
 import Rounds from "./Rounds";
 import Hdcp from "./Hdcp";
 import MaxPossible from "./MaxPossible";
 import { IPlayer } from "../types/players";
+import { PlayersContext } from "../contexts/PlayersContext";
 
-interface Props {
-  players: IPlayer[];
-}
-
-function ScoreCard({ players }: Props) {
+function ScoreCard() {
+  const { players } = useContext(PlayersContext);
+  console.log("playsefse", players);
   const rounds: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
@@ -23,7 +22,7 @@ function ScoreCard({ players }: Props) {
         <Hdcp />
         <MaxPossible />
       </header>
-      {players.map((player) => (
+      {players.map((player: IPlayer) => (
         <Rounds player={player} rounds={rounds} key={player.id} />
       ))}
     </section>

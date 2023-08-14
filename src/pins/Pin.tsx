@@ -1,18 +1,24 @@
 import React, { useContext } from "react";
 import { PinsContext } from "../contexts/PinsContext";
+import { ScoreContext } from "../contexts/ScoreContext";
+import { PlayersContext } from "../contexts/PlayersContext";
 
 interface Props {
-  value: number;
+  pin: number;
 }
-function Pin({ value }: Props) {
+
+function Pin({ pin }: Props) {
   const { updatePins } = useContext(PinsContext);
+  const { updateScore } = useContext(PlayersContext);
+
   return (
     <button
       onClick={() => {
-        updatePins(value);
+        updatePins(pin);
+        updateScore(pin);
       }}
     >
-      {value}
+      {pin}
     </button>
   );
 }

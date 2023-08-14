@@ -1,27 +1,46 @@
-import React, { createContext, useState } from "react";
-import { v4 as uuid } from "uuid";
+import React, { createContext, useEffect, useState } from "react";
 import useToggleState from "../hooks/useToggleState";
+import {
+  CreatePlayer,
+  GetActivePlayer,
+  GetActiveRound,
+  GetUpdatedScore,
+} from "../helpers/helper";
 export const PlayersContext = createContext();
 
 export function PlayersProvider(props) {
-  const [players, setPlayers] = useState([
-    { name: "first player", id: uuid(), hdcp: 0, score: [] },
-  ]);
-
+  const [players, setPlayers] = useState([CreatePlayer()]);
   const [activePlayer, setActivePlayer] = useState(players[0]);
-
-  const updateActivePlayer = (selectedPlayer) => {
-    setActivePlayer(selectedPlayer);
-    console.log("activeplayer in func", activePlayer);
-  };
-
+  const [activeRound, setActiveRound] = useState(players[0].rounds[0]);
   const [showAddPlayer, toggle] = useToggleState(true);
 
-  const addPlayer = (name) => {
-    if (name) {
-      setPlayers([...players, { name: name, id: uuid(), hdcp: 0, score: [] }]);
-    }
+  const addPlayer = (name, hdcp) => {
+    if (name) setPlayers([...players, CreatePlayer(name, hdcp)]);
     toggle();
+  };
+
+  const updateActivePlayer = (playerId, players) => {
+    const player = GetActivePlayer(players, playerId);
+    setActivePlayer(player);
+  };
+
+  const updateActiveRound = () => {
+    const round = GetActiveRound(activePlayer);
+    setActiveRound(round);
+  };
+
+  useEffect(() => {
+    updateActiveRound();
+  }, [activePlayer]);
+
+  const updateScore = (score) => {
+    const updatedPlayers = GetUpdatedScore(
+      score,
+      players,
+      activePlayer,
+      activeRound
+    );
+    setPlayers(updatedPlayers);
   };
 
   return (
@@ -30,6 +49,9 @@ export function PlayersProvider(props) {
         players,
         activePlayer,
         updateActivePlayer,
+        activeRound,
+        updateActiveRound,
+        updateScore,
         addPlayer,
         showAddPlayer,
         toggle,

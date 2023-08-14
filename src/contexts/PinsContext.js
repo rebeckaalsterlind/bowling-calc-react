@@ -1,12 +1,14 @@
 import React, { createContext, useState } from "react";
+import { GetNumRounds as GetPins } from "../helpers/helper";
 export const PinsContext = createContext();
 
 export function PinsProvider(props) {
-  const initialPins = Array.from({ length: 11 }, (_, i) => i);
+  const initialPins = GetPins(11, 0);
   const [pins, setPins] = useState(initialPins);
+  const [remainingPins, setRemainingPins] = [useState(initialPins)];
 
   const updatePins = (knockedDown) => {
-    const remainingPins = Array.from({ length: 11 - knockedDown }, (_, i) => i);
+    const remainingPins = GetPins(11 - knockedDown, 0);
     setPins(remainingPins);
   };
 

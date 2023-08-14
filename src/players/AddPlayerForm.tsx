@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useInputState from "../hooks/useInputState";
 import { PlayersContext } from "../contexts/PlayersContext";
 
 function AddPlayerForm() {
-  const [value, handleChange, reset] = useInputState("");
+  const [name, handleName, resetName] = useInputState("");
+  const [hdcp, setHdcp] = useState(0);
+
+  // const [hdcp, handleHdcp, resetHdcp] = useInputState(0);
+
   const { addPlayer, showAddPlayer, toggle } = useContext(PlayersContext);
 
   return (
@@ -14,11 +18,17 @@ function AddPlayerForm() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addPlayer(value);
-            reset();
+            addPlayer(name, hdcp);
+            resetName();
           }}
         >
-          <input type="text" value={value} onChange={handleChange} />
+          <input
+            type="text"
+            placeholder={"Name"}
+            value={name}
+            onChange={handleName}
+          />
+          <input type="number" onChange={(e) => setHdcp(34)} />
           <button type="submit">Add</button>
         </form>
       )}

@@ -6,29 +6,29 @@ import { PlayersContext } from "../contexts/PlayersContext";
 import Round from "./Round";
 import Hdcp from "./Hdcp";
 import MaxPossible from "./MaxPossible";
+import { GetNumRounds } from "../helpers/helper";
+
 interface Props {
   player: IPlayer;
 }
-function ScoreCard({ player }: Props) {
-  const roundNumbers: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
-  const { activePlayer, updateActivePlayer } = useContext(PlayersContext);
-  const isActive = (playerId: string) => {
-    console.log("in is avtive", playerId === activePlayer.id);
-    return playerId === activePlayer.id;
-  };
 
+function ScoreCard({ player }: Props) {
+  const { players, updateActivePlayer } = useContext(PlayersContext);
+  const roundNumbers: number[] = GetNumRounds(10, 1);
   return (
     <section
-      className={`scorecard ${isActive(player.id) ? "active-player" : ""}`}
-      onClick={() => updateActivePlayer(player)}
+      className={`scorecard ${player.isActive ? "active-player" : ""}`}
+      onClick={() => {
+        updateActivePlayer(player.id, players);
+      }}
     >
-      {roundNumbers.map((num) => (
+      {roundNumbers.map((num, index) => (
         <>
-          <Round key={num} num={num} />
+          <Round key={num} num={num} scores={player.rounds[index].scores} />
         </>
       ))}
-      <Hdcp />
-      <MaxPossible />
+      <Hdcp hdcpTotals={player.hdcpTotals} />
+      <MaxPossible maxPossible={player.maxPossible} />
     </section>
   );
 }

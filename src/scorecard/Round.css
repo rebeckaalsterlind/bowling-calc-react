@@ -3,15 +3,9 @@
 }
 
 .scorecard-header,
-.corner-box {
+.second-score {
   border: none;
   border-bottom: 1px solid black;
-}
-
-.corner-box {
-  width: 50%;
-  height: 50%;
-  border-left: 1px solid black;
 }
 
 .score-box {
@@ -19,11 +13,25 @@
   background-color: rgb(255, 254, 225);
   display: flex;
   flex-direction: column;
-  justify-content: right;
-  align-items: end;
 }
 
-.totals-box {
+.score-box-top {
+  display: flex;
+  width: 100%;
+  height: 50%;
+  justify-content: end;
+}
+.first-score {
+  width: 50%;
+  text-align: center;
+}
+
+.second-score {
+  width: 50%;
+  border-left: 1px solid black;
+}
+
+.totals {
   width: 100%;
   height: 50%;
 }
